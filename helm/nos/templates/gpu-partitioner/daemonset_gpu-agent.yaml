@@ -6,6 +6,13 @@ metadata:
     control-plane: nos-controller-manager
     {{- include "gpuAgent.labels" . | nindent 4 }}
   name: {{ include "gpuAgent.fullname" . }}
+  annotations:
+    ignore-check.kube-linter.io/privileged-container: "It needs tor run nvidia mig commands"
+    ignore-check.kube-linter.io/privilege-escalation-container: "It needs to run nvidia mig commands"
+    ignore-check.kube-linter.io/run-as-non-root: "It needs to run nvidia mig commands"
+    ignore-check.kube-linter.io/unset-cpu-requirements: "It needs to run nvidia mig commands"
+    container.seccomp.security.alpha.kubernetes.io/kube-rbac-proxy: runtime/default
+    container.seccomp.security.alpha.kubernetes.io/{{ include "gpuAgent.fullname" . }}: runtime/default
 spec:
   selector:
     matchLabels:
@@ -51,10 +58,15 @@ spec:
               port: 8081
             initialDelaySeconds: 5
             periodSeconds: 10
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
           resources:
             {{- toYaml .Values.gpuPartitioner.gpuAgent.resources | nindent 12 }}
           securityContext:
             privileged: true
+            readOnlyRootFilesystem: true
           volumeMounts:
             - mountPath: /{{ include "gpuAgent.configFileName" . }}
               name: gpu-agent-config
@@ -81,6 +93,7 @@ spec:
           resources: {{- toYaml .Values.gpuPartitioner.kubeRbacProxy.resources | nindent 12 }}
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop:
                 - ALL

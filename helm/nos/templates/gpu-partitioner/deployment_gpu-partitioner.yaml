@@ -50,6 +50,10 @@ spec:
               port: 8081
             initialDelaySeconds: 5
             periodSeconds: 10
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
           resources:
             {{- toYaml .Values.gpuPartitioner.resources | nindent 12 }}
           volumeMounts:
@@ -68,6 +72,7 @@ spec:
             {{- end }}
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop:
                 - ALL
@@ -87,6 +92,7 @@ spec:
               protocol: TCP
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop:
                 - ALL

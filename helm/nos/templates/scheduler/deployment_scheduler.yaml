@@ -42,6 +42,10 @@ spec:
               path: /healthz
               port: 10259
               scheme: HTTPS
+          ports:
+            - containerPort: 10259
+              name: http
+              protocol: TCP
           resources:
             {{- toYaml .Values.scheduler.resources | nindent 12 }}
           securityContext:
