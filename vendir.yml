@@ -1,0 +1,17 @@
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+minimumRequiredVersion: 0.12.0
+directories:
+- path: vendor
+  contents:
+  - path: .
+    git:
+      url: https://github.com/nebuly-ai/nos
+      ref: main
+    includePaths:
+    - helm-charts/nos/**/*
+- path: helm/nos/templates
+  contents:
+  - path: .
+    directory:
+      path: vendor/helm-charts/nos/templates

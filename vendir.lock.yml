@@ -1,0 +1,15 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: 'doc: update logo'
+      sha: 12e0a7289f5b9bc3fa80036d0075467fd32cfb33
+      tags:
+      - 0.1.2-18-g12e0a72
+    path: .
+  path: vendor
+- contents:
+  - directory: {}
+    path: .
+  path: helm/nos/templates
+kind: LockConfig
