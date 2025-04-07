@@ -1,13 +1,9 @@
 apiVersion: v2
 appVersion: 0.1.2
-# Please make sure your name DOES NOT end in "app" or "-app".
 name: nos
-# Please describe what the app provides in a sentence or two.
-description: Please add description
+description: Nebuly Open Source (NOS) is a Kubernetes-native solution for managing and optimizing GPU workloads.
 home: https://github.com/giantswarm/nos-app
-# If you have an icon/logo, you should add it to https://github.com/giantswarm/web-assets
-# and set the final URL as a value here and uncomment.
-icon: https://s.giantswarm.io/app-icons/example/1/light.svg
+icon: https://s.giantswarm.io/app-icons/k8s-initiator/1/dark.svg
 sources:
   - https://github.com/nebuly-ai/nos
 version: 0.1.0
