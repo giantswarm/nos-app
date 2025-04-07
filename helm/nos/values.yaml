@@ -323,8 +323,10 @@ gpuPartitioner:
   knownMigGeometries:
     - models: [ "A30" ]
       allowedGeometries:
-        - 1g.6gb: 6
-        - 2g.12gb: 3
+        - 1g.6gb: 4
+        - 1g.6gb: 2
+          2g.12gb: 1
+        - 2g.12gb: 2
         - 4g.24gb: 1
     - models: [ "A100-SXM4-40GB", "NVIDIA-A100-40GB-PCIe", "NVIDIA-A100-SXM4-40GB" ]
       allowedGeometries:
