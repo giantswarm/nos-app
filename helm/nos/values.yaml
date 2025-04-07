@@ -5,8 +5,6 @@
 #
 #   https://docs.giantswarm.io/tutorials/fleet-management/app-platform/app-configuration/#basic-values-merging-example
 #
-allowDefaultNamespace: true
-
 image:
   name: "giantswarm/nos-app"
   tag: ""
@@ -22,7 +20,7 @@ registry:
 nvidiaGpuResourceMemoryGB: 32
 
 # -- If true allows to deploy `nos` chart in the `default` namespace
-allowDefaultNamespace: false
+allowDefaultNamespace: true
 
 # -- If true, shares with Nebuly telemetry data collected only during the Chart installation
 shareTelemetry: true
