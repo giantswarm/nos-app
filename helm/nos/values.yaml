@@ -8,8 +8,10 @@
 image:
   name: "giantswarm/nos-app"
   tag: ""
+
 registry:
   domain: gsoci.azurecr.io
+
 # Default values for nos.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
@@ -73,10 +75,17 @@ operator:
 
   # -- Sets the security context of the operator container.
   securityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
+    privileged: false
     allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
     capabilities:
       drop:
         - ALL
+    seccompProfile:
+      type: RuntimeDefault
 
   # -- Sets the resource limits and requests of the operator controller manager container.
   resources:
@@ -98,6 +107,8 @@ operator:
 
   # -- Sets the nodeSelector config of the operator Pod.
   nodeSelector: { }
+
+  webhookCertIssuerName: "selfsigned-giantswarm"
 
 scheduler:
   # -- Enable or disable the `nos scheduler`
@@ -152,10 +163,21 @@ scheduler:
 
   # -- Sets the security context of the scheduler container
   securityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
     privileged: false
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
+    seccompProfile:
+      type: RuntimeDefault
 
   # -- Sets the security context of the scheduler Pod
-  podSecurityContext: { }
+  podSecurityContext:
+    runAsNonRoot: true
 
 gpuPartitioner:
   # -- Enable or disable the `nos gpu partitioner`

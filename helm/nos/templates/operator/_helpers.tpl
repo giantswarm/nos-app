@@ -102,10 +102,3 @@ Create the name of the controller manager metrics reader role
 {{- define "operator.metricsReaderRoleName" -}}
 {{ include "operator.fullname" . }}-metrics-reader
 {{- end }}
-
-{{/*
-Create the name of the self-signed certificate issuer
-*/}}
-{{- define "operator.selfSignedCertIssuerName" -}}
-{{ include "operator.fullname" . }}-self-signed-issuer
-{{- end }}
