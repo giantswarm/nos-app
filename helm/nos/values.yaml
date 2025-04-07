@@ -5,6 +5,8 @@
 #
 #   https://docs.giantswarm.io/tutorials/fleet-management/app-platform/app-configuration/#basic-values-merging-example
 #
+allowDefaultNamespace: true
+
 image:
   name: "giantswarm/nos-app"
   tag: ""
