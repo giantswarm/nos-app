@@ -54,7 +54,7 @@ operator:
     image:
       repository: gcr.io/kubebuilder/kube-rbac-proxy
       pullPolicy: IfNotPresent
-      tag: "v0.13.0"
+      tag: "v0.16.0"
     resources:
       limits:
         cpu: 500m
@@ -266,7 +266,7 @@ gpuPartitioner:
     image:
       repository: gcr.io/kubebuilder/kube-rbac-proxy
       pullPolicy: IfNotPresent
-      tag: "v0.13.0"
+      tag: "v0.16.0"
     resources:
       limits:
         cpu: 500m
