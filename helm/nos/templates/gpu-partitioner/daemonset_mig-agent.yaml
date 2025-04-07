@@ -2,6 +2,11 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
+  annotations:
+    ignore-check.kube-linter.io/privileged-container: "It needs tor run nvidia mig commands"
+    ignore-check.kube-linter.io/privilege-escalation-container: "It needs to run nvidia mig commands"
+    ignore-check.kube-linter.io/run-as-non-root: "It needs to run nvidia mig commands"
+    ignore-check.kube-linter.io/unset-cpu-requirements: "It needs to run nvidia mig commands"
   labels:
     control-plane: nos-controller-manager
     {{- include "migAgent.labels" . | nindent 4 }}
@@ -48,10 +53,15 @@ spec:
               port: 8081
             initialDelaySeconds: 5
             periodSeconds: 10
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
           resources:
             {{- toYaml .Values.gpuPartitioner.migAgent.resources | nindent 12 }}
           securityContext:
             privileged: true
+            readOnlyRootFilesystem: true
           volumeMounts:
             - mountPath: /{{ include "migAgent.configFileName" . }}
               name: mig-agent-config
@@ -78,6 +88,7 @@ spec:
           resources: {{- toYaml .Values.gpuPartitioner.kubeRbacProxy.resources | nindent 12 }}
           securityContext:
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             capabilities:
               drop:
                 - ALL

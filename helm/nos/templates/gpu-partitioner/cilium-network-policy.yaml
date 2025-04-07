@@ -1,0 +1,35 @@
+{{- if .Values.gpuPartitioner.enabled -}}
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: allow-{{ include "gpuAgent.fullname" . }}
+spec:
+  description: "Allow GPU partitioner pods to access the Kubernetes API server."
+  endpointSelector:
+    matchLabels:
+      {{- include "gpuPartitioner.selectorLabels" . | nindent 6 }}
+  egress:
+  - toEntities:
+    - kube-apiserver
+    toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+      - port: "6443"
+        protocol: TCP
+      - port: "8081"
+        protocol: TCP
+  ingress:
+  - fromEntities:
+    - cluster
+    toPorts:
+    - ports:
+      - port: "443"
+        protocol: TCP
+      - port: "6443"
+        protocol: TCP
+      - port: "8000"
+        protocol: TCP
+      - port: "8081"
+        protocol: TCP
+{{- end -}}

@@ -42,6 +42,9 @@ spec:
             - containerPort: 9443
               name: webhook-server
               protocol: TCP
+            - containerPort: 8081
+              name: http
+              protocol: TCP
           livenessProbe:
             httpGet:
               path: /healthz
@@ -54,6 +57,10 @@ spec:
               port: 8081
             initialDelaySeconds: 5
             periodSeconds: 10
+          ports:
+            - containerPort: 8081
+              name: http
+              protocol: TCP
           resources:
             {{- toYaml .Values.operator.resources | nindent 12 }}
           volumeMounts:
@@ -80,6 +87,8 @@ spec:
               name: https
               protocol: TCP
           resources: {{- toYaml .Values.operator.kubeRbacProxy.resources | nindent 12 }}
+          securityContext:
+            {{- toYaml .Values.operator.securityContext | nindent 12 }}
 
       {{- with .Values.operator.nodeSelector }}
       nodeSelector:

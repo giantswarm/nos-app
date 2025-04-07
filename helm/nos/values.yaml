@@ -8,8 +8,10 @@
 image:
   name: "giantswarm/nos-app"
   tag: ""
+
 registry:
   domain: gsoci.azurecr.io
+
 # Default values for nos.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
@@ -18,7 +20,7 @@ registry:
 nvidiaGpuResourceMemoryGB: 32
 
 # -- If true allows to deploy `nos` chart in the `default` namespace
-allowDefaultNamespace: false
+allowDefaultNamespace: true
 
 # -- If true, shares with Nebuly telemetry data collected only during the Chart installation
 shareTelemetry: true
@@ -73,10 +75,17 @@ operator:
 
   # -- Sets the security context of the operator container.
   securityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
+    privileged: false
     allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
     capabilities:
       drop:
         - ALL
+    seccompProfile:
+      type: RuntimeDefault
 
   # -- Sets the resource limits and requests of the operator controller manager container.
   resources:
@@ -88,16 +97,18 @@ operator:
       memory: 64Mi
 
   # -- Sets the annotations of the operator Pod.
-  podAnnotations: { }
+  podAnnotations: {}
 
   # -- Sets the tolerations of the operator Pod.
-  tolerations: [ ]
+  tolerations: []
 
   # -- Sets the affinity config of the operator Pod.
-  affinity: { }
+  affinity: {}
 
   # -- Sets the nodeSelector config of the operator Pod.
-  nodeSelector: { }
+  nodeSelector: {}
+
+  webhookCertIssuerName: "selfsigned-giantswarm"
 
 scheduler:
   # -- Enable or disable the `nos scheduler`
@@ -109,7 +120,7 @@ scheduler:
   logLevel: 0
 
   # -- Overrides the Kube Scheduler configuration
-  config: { }
+  config: {}
 
   # -- Number of replicas of the scheduler.
   replicaCount: 1
@@ -139,23 +150,34 @@ scheduler:
       memory: 64Mi
 
   # -- Sets the annotations of the scheduler Pod.
-  podAnnotations: { }
+  podAnnotations: {}
 
   # -- Sets the tolerations of the scheduler deployment.
-  tolerations: [ ]
+  tolerations: []
 
   # -- Sets the affinity config of the scheduler deployment.
-  affinity: { }
+  affinity: {}
 
   # -- Sets the nodeSelector config of the scheduler deployment.
-  nodeSelector: { }
+  nodeSelector: {}
 
   # -- Sets the security context of the scheduler container
   securityContext:
+    runAsUser: 65534
+    runAsGroup: 65534
+    runAsNonRoot: true
     privileged: false
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
+    seccompProfile:
+      type: RuntimeDefault
 
   # -- Sets the security context of the scheduler Pod
-  podSecurityContext: { }
+  podSecurityContext:
+    runAsNonRoot: true
 
 gpuPartitioner:
   # -- Enable or disable the `nos gpu partitioner`
@@ -307,28 +329,28 @@ gpuPartitioner:
       memory: 64Mi
 
   # -- Sets the annotations of the GPU Partitioner Pod.
-  podAnnotations: { }
+  podAnnotations: {}
 
   # -- Sets the tolerations of the GPU Partitioner Pod.
-  tolerations: [ ]
+  tolerations: []
 
   # -- Sets the affinity config of the GPU Partitioner Pod.
-  affinity: { }
+  affinity: {}
 
   # -- Sets the nodeSelector config of the GPU Partitioner Pod.
-  nodeSelector: { }
+  nodeSelector: {}
 
   # -- List that associates GPU models to the respective allowed MIG configurations
   # @default -- -
   knownMigGeometries:
-    - models: [ "A30" ]
+    - models: ["A30"]
       allowedGeometries:
         - 1g.6gb: 4
         - 1g.6gb: 2
           2g.12gb: 1
         - 2g.12gb: 2
         - 4g.24gb: 1
-    - models: [ "A100-SXM4-40GB", "NVIDIA-A100-40GB-PCIe", "NVIDIA-A100-SXM4-40GB" ]
+    - models: ["A100-SXM4-40GB", "NVIDIA-A100-40GB-PCIe", "NVIDIA-A100-SXM4-40GB"]
       allowedGeometries:
         - 1g.5gb: 7
         - 1g.5gb: 5
@@ -354,7 +376,7 @@ gpuPartitioner:
           2g.10gb: 1
           4g.20gb: 1
         - 7g.40gb: 1
-    - models: [ "NVIDIA-A100-SXM4-80GB", "NVIDIA-A100-80GB-PCIe" ]
+    - models: ["NVIDIA-A100-SXM4-80GB", "NVIDIA-A100-80GB-PCIe"]
       allowedGeometries:
         - 1g.10gb: 7
         - 1g.10gb: 5

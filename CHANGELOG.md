@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated container images to 0.1.2 like upstream.
+- Add cilium network policies to talk to API.
+- Adapt webhook certificate to works in platform.
+
 ## [0.0.1] - 2025-04-07
 
 ### Added
