@@ -110,6 +110,8 @@ operator:
 
   webhookCertIssuerName: "selfsigned-giantswarm"
 
+  webhookCertIssuerInstall: false # Set to true in non GS clusters
+
 scheduler:
   # -- Enable or disable the `nos scheduler`
   enabled: true
@@ -376,7 +378,7 @@ gpuPartitioner:
           2g.10gb: 1
           4g.20gb: 1
         - 7g.40gb: 1
-    - models: ["NVIDIA-A100-SXM4-80GB", "NVIDIA-A100-80GB-PCIe"]
+    - models: ["NVIDIA-A100-SXM4-80GB", "NVIDIA-A100-80GB-PCIe", "NVIDIA-H100-SXM5-80GB", "NVIDIA-H100-80GB-PCIe"]
       allowedGeometries:
         - 1g.10gb: 7
         - 1g.10gb: 5

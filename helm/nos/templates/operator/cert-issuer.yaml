@@ -1,4 +1,4 @@
-{{- if .Values.operator.enabled -}}
+{{- if and (eq .Values.operator.enabled true) (eq .Values.operator.webhookCertIssuerInstall true) -}}
 {{- if .Capabilities.APIVersions.Has "cert-manager.io/v1" -}}
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
