@@ -110,7 +110,8 @@ operator:
 
   webhookCertIssuerName: "selfsigned-giantswarm"
 
-  webhookCertIssuerInstall: false # Set to true in non GS clusters
+  # -- Set to true in non GS clusters
+  webhookCertIssuerInstall: false
 
 scheduler:
   # -- Enable or disable the `nos scheduler`
