@@ -20,4 +20,3 @@ To enable automatic MPS partitioning on the GPUs of a node:
 kubectl label nodes <node-name> "nos.nebuly.com/gpu-partitioning=mps"
 ```
 {{- end -}}
-
