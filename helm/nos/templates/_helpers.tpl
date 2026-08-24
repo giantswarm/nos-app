@@ -47,5 +47,3 @@ application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantsw
 {{/*{{- uuidv4 -}}*/}}
 {{/*{{- end -}}*/}}
 {{/*{{- end}}*/}}
-
-

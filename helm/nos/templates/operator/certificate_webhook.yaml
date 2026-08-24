@@ -14,4 +14,3 @@ spec:
   secretName: {{ include "operator.webhookCertSecretName" . }}
 {{- end -}}
 {{- end -}}
-
