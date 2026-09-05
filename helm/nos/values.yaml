@@ -54,7 +54,7 @@ operator:
   kubeRbacProxy:
     logLevel: 1
     image:
-      repository: gcr.io/kubebuilder/kube-rbac-proxy
+      repository: gsoci.azurecr.io/giantswarm/kube-rbac-proxy
       pullPolicy: IfNotPresent
       tag: "v0.16.0"
     resources:
@@ -289,7 +289,7 @@ gpuPartitioner:
   kubeRbacProxy:
     logLevel: 1
     image:
-      repository: gcr.io/kubebuilder/kube-rbac-proxy
+      repository: gsoci.azurecr.io/giantswarm/kube-rbac-proxy
       pullPolicy: IfNotPresent
       tag: "v0.16.0"
     resources:
