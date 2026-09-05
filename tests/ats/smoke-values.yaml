@@ -1,0 +1,14 @@
+# Values for the app-test-suite smoke (tests/ats/test_smoke.py) on the bare kind cluster
+# the generated execute-chart-tests job creates. Layered over the chart defaults, see
+# .ats/main.yaml (app-tests-app-config-file).
+
+# The kind cluster has no cert-manager. The operator's webhook Certificate and
+# ClusterIssuer are gated on the cert-manager API, so they are not rendered, but the
+# operator Deployment still mounts the webhook TLS Secret they would produce, so the
+# operator pod could never start (helm --wait would time out). The smoke therefore covers
+# the scheduler and the GPU partitioner; the operator needs a cluster with cert-manager.
+operator:
+  enabled: false
+
+# The post-install hook Pod posts usage telemetry to nebuly.cloud; keep the smoke offline.
+shareTelemetry: false
