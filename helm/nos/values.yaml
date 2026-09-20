@@ -56,7 +56,7 @@ operator:
     image:
       repository: gsoci.azurecr.io/giantswarm/kube-rbac-proxy
       pullPolicy: IfNotPresent
-      tag: "v0.16.0"
+      tag: "v0.22.1"
     resources:
       limits:
         cpu: 500m
@@ -291,7 +291,7 @@ gpuPartitioner:
     image:
       repository: gsoci.azurecr.io/giantswarm/kube-rbac-proxy
       pullPolicy: IfNotPresent
-      tag: "v0.16.0"
+      tag: "v0.22.1"
     resources:
       limits:
         cpu: 500m
