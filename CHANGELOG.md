@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Make the `helm.sh/chart` label valid for any chart version: a long version cut on `.` or `_` (from `+`) was refused by the API server.
+
 ## [0.2.0] - 2025-04-25
 
 ### Changed
