@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.13] - 2026-09-23
+
 ### Fixed
 
 - Make the `helm.sh/chart` label valid for any chart version: a long version cut on `.` or `_` (from `+`) was refused by the API server.
@@ -40,7 +42,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added upstream chart and adapt the values.
 
-[Unreleased]: https://github.com/giantswarm/nos-app/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nos-app/compare/v0.2.13...HEAD
+[0.2.13]: https://github.com/giantswarm/nos-app/compare/v0.2.0...v0.2.13
 [0.2.0]: https://github.com/giantswarm/nos-app/compare/v0.1.2...v0.2.0
 [0.1.2]: https://github.com/giantswarm/nos-app/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/giantswarm/nos-app/compare/v0.1.0...v0.1.1
